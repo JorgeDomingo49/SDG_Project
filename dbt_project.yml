@@ -33,6 +33,6 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
   SDG_Proyect:
-    # Applies to all files under models/example/
-    example:
-      materialized: view
+    database: sdg_proyect
+    staging:
+      materialized: table
