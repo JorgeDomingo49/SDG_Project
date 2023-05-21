@@ -8,14 +8,14 @@ source  as (
 
 customer as (
     select
-        c_acctbal as cust_balance,
-        c_address as cust_address,
-        c_comment as cust_comment,
-        c_custkey as cust_id,
-        c_mktsegment as cust_market_segment,
-        c_name as cust_name,
-        c_nationkey as cust_nation_key,
-        c_phone as cust_phone
+        c_acctbal as acctbal,
+        c_address as address,
+        c_comment as comment,
+        c_custkey as custkey,
+        c_mktsegment as mktsegment,
+        c_name as name,
+        c_nationkey as nationkey,
+        c_phone as phone
     from source
 )
 select * from customer

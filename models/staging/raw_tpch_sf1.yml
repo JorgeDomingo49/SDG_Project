@@ -9,7 +9,37 @@ sources:
       - name: customer
         description: Tabla de clientes
         columns:
-          - name: c_custkey
+          - name: custkey
             tests:
             - unique
             - not_null
+      - name: lineitem
+        description: Tabla de informacion del item
+      - name: nation
+        description: Tabla de información del país
+      - name: orders
+        description: Tabla de pedidos
+      - name: part
+        description: Tabla de partes
+        columns:
+          - name: partkey
+            tests:
+            - unique
+            - not_null
+      - name: partsupp
+        description: Tabla de información adicional del proveedor
+      - name: region
+        description: Tabla de información de las regiones del mundo
+        columns:
+          - name: regionkey
+            tests:
+            - unique
+            - not_null
+      - name: supplier
+        description: Tabla de información de los proveedores
+        columns:
+          - name: suppkey
+            tests:
+            - unique
+            - not_null
+    
