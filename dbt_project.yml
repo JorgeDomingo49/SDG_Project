@@ -36,3 +36,5 @@ models:
     database: sdg_proyect
     staging:
       materialized: table
+    intermediate:
+      materialized: table
