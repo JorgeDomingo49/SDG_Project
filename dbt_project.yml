@@ -38,3 +38,7 @@ models:
       materialized: table
     intermediate:
       materialized: table
+    marts:
+      materialized: view
+vars:
+  default_min_date: to_date('19000101', 'yyyyMMdd')

@@ -17,8 +17,18 @@ sources:
         description: Tabla de informacion del item
       - name: nation
         description: Tabla de información del país
+        columns: 
+          - name: nationkey
+            tests:
+            - unique
+            - not_null
       - name: orders
         description: Tabla de pedidos
+        columns: 
+          - name: orderkey
+            tests:
+            - unique
+            - not_null
       - name: part
         description: Tabla de partes
         columns:
@@ -28,6 +38,15 @@ sources:
             - not_null
       - name: partsupp
         description: Tabla de información adicional del proveedor
+        columns:
+          - name: partkey
+            tests:
+            - unique
+            - not_null
+          - name: suppkey
+            tests:
+            - unique
+            - not_null
       - name: region
         description: Tabla de información de las regiones del mundo
         columns:

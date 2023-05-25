@@ -1,30 +1,23 @@
 --Cuenta el numero de pedidos que ha hecho cada cliente
-
-
 with orders as (
-
     select * from {{ ref('orders') }}
-
 ),
 
 customers as (
-
     select * from {{ ref('customer') }}
-
 ),
-
 ordersbycustomer as(
     select 
         orders.custkey,
-        customers.name as customername,
-        customers.address as customeradress,
-        customers.phone as customerphone,
-        count(orders.orderkey) as numberoforders
+        min(orderdate) as first_order_date,
+        max(orderdate) as most_recent_order_date,
+        count(orderkey) as number_of_orders
 
+        from orders
 
-    from orders
-    inner join customers on orders.custkey=customers.custkey
-    group by orders.custkey, customers.name, customers.address, customers.phone
+        group by 1
 )
 
 select * from ordersbycustomer
+
+

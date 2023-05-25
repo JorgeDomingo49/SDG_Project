@@ -1,15 +1,10 @@
 --Muestra informacion completa de los pedidos
-
 with orders as (
-
     select * from {{ ref('orders') }}
-
 ),
 
 customers as (
-
     select * from {{ ref('customer') }}
-
 ),
 
 lineitem as (
@@ -24,41 +19,38 @@ region as (
     select * from {{ ref('region') }}
 ),
 
+--Cogemos los pedidos con prioridad alta
 
---Cogemos el valor total de todos los pedidos
-
-order_total as (
+order_priority as (
 
     select 
         orderkey,
-        sum (totalprice) as order_value
+        orderpriority
     from orders
-    group by 1
+    where orderpriority='1-URGENT'
 
 ),
 
-high_priority_orders as(
+intermediate_orders as(
     select
-        --orders.orderkey,
-        --orders.custkey,
+        orders.orderkey,
+        orders.custkey,
         customers.name as customername,
-        customers.address as customeradress,
+        customers.address as customeraddress,
         customers.phone as customerphone,
         orders.totalprice as price,
         orders.orderdate,
         lineitem.shipdate,
         lineitem.receiptdate,
-        orders.orderpriority,
+        order_priority.orderpriority,
         nation.name as nation,
         region.name as region
-        --order_total.order_value
 
     from orders
     left join lineitem on lineitem.orderkey=orders.orderkey
     left join customers on orders.custkey=customers.custkey
     left join nation on nation.nationkey=customers.nationkey
     left join region on region.regionkey=nation.regionkey
-    where orders.orderpriority='1-URGENT'
+    inner join order_priority on order_priority.orderkey=orders.orderkey
 )
-
-select * from high_priority_orders
+select * from intermediate_orders
